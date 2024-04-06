@@ -59,11 +59,23 @@ public abstract class Clientes implements ICalculable {
 	public TratamientosPersonales[] getTratamientosP() {
 		return tratamientos;
 	}
-
-	public void setTratamientos(Tratamientos t, int c, int p) {
-		tratamientos[p].setTratamientos(t);
-		tratamientos[p].setCantidadSesiones(c);;
+	public void setTratamientosPCantidadSesiones( int c, int p) {
+		tratamientos[p].setCantidadSesiones(c);
 	}
+	public void setTratamientosP(Tratamientos t, int p) {
+		tratamientos[p].setTratamientos(t);
+	}
+	public void createTratamientosP(Tratamientos t,boolean b, int p) {
+		if(b) {
+			tratamientos[p] = new Salud();
+			
+		}
+		else {
+			tratamientos[p] = new TratamientosPersonales();
+		}
+		tratamientos[p].setTratamientos(t);
+	}
+	
 
 	public char getFormaPago() {
 		return formaPago;
@@ -73,13 +85,10 @@ public abstract class Clientes implements ICalculable {
 		this.formaPago = formaPago;
 	}
 	
-	Clientes(){
-		for(int i=0; i<tratamientos.length; i++) {
-			tratamientos[i]= new TratamientosPersonales();
-		}
-	}
+	Clientes(){}
+	
 	Clientes(String nombre, int numeroDocumento, String objetivo, Calendar fechaNacimiento, Calendar fechaInicio,
-			Sucursales[] sucursales, TratamientosPersonales[] tratamientos, char formaPago) {
+			Sucursales[] sucursales, char formaPago) {
 		this();
 		this.nombre = nombre;
 		this.numeroDocumento = numeroDocumento;
@@ -87,7 +96,6 @@ public abstract class Clientes implements ICalculable {
 		this.fechaNacimiento = fechaNacimiento;
 		this.fechaInicio = fechaInicio;
 		this.sucursales = sucursales;
-		this.tratamientos = tratamientos;
 		this.formaPago = formaPago;
 	}
 	

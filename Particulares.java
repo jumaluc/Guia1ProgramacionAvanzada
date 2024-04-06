@@ -24,8 +24,8 @@ public class Particulares extends Clientes {
 	}
 
 	Particulares(String nombre, int numeroDocumento, String objetivo, Calendar fechaNacimiento, Calendar fechaInicio,
-			Sucursales[] sucursales, TratamientosPersonales[] tratamientos, char formaPago, double descuento){
-		super(nombre, numeroDocumento, objetivo, fechaNacimiento, fechaInicio, sucursales, tratamientos, formaPago);
+			Sucursales[] sucursales,  char formaPago, double descuento){
+		super(nombre, numeroDocumento, objetivo, fechaNacimiento, fechaInicio, sucursales,  formaPago);
 		this.descuento=descuento;
 	}
 	Particulares(){};

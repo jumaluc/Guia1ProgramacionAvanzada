@@ -22,8 +22,8 @@ public class ConPrepagas extends Clientes{
 
 
 	ConPrepagas(String nombre, int numeroDocumento, String objetivo, Calendar fechaNacimiento, Calendar fechaInicio,
-			Sucursales[] sucursales, TratamientosPersonales[] tratamientos, char formaPago, Prepagas prepaga, String numeroAfiliado){
-		super(nombre, numeroDocumento, objetivo, fechaNacimiento, fechaInicio, sucursales, tratamientos, formaPago);
+			Sucursales[] sucursales, char formaPago, Prepagas prepaga, String numeroAfiliado){
+		super(nombre, numeroDocumento, objetivo, fechaNacimiento, fechaInicio, sucursales, formaPago);
 		this.prepaga=prepaga;
 		this.numeroAfiliado=numeroAfiliado;
 }

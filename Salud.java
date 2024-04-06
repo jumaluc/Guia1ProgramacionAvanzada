@@ -23,7 +23,7 @@ public final class Salud extends TratamientosPersonales{
 	Salud(Tratamientos tratamientos, int cantidadSesiones, boolean consultaClinica, double valorAdicional){
 		super(tratamientos, cantidadSesiones);
 		this.consultaClinica=consultaClinica;
-		this.valorAdicional=valorAdicional;
+		Salud.valorAdicional=valorAdicional;
 	}
 	Salud(){};
 

@@ -3,7 +3,7 @@ public class Principal {
 
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
-		Clientes[] clientes = new Clientes[100];
+		Clientes[] clientes = new Clientes[10];
 		Prepagas [] prepagas= new Prepagas[15]; //SON 15
 		Sucursales [] sucursales = new Sucursales[10];
 		Tratamientos tratamientos[] = new Tratamientos[10];
@@ -238,110 +238,6 @@ case 2:  //PUNTO C - INGRESAR CLIENTES Y SUS TRATAMIENTOS MOSTRANDO POR PANTALLA
 							System.out.print("ERROR. Ingrese una sucursal ingresada en el sistema: ");
 							aNombre = validarString();
 						}}}}
-			//TRATAMIENTOS
-			int cantidadTratamientos=0;
-			while(true) {
-			System.out.printf("<<Cantidad de Tratamientos que el cliente va a tener (maximo %d): ", tratamientos.length);
-			cantidadTratamientos = validarInt();
-			if(cantidadTratamientos <= tratamientos.length) {break;}
-			else { System.out.printf("ERROR. Maximo %d", tratamientos.length);}
-			}
-		
-			TratamientosPersonales tratamientosPersonales [] = new TratamientosPersonales[cantidadTratamientos];
-			for(int j=0; j<tratamientosPersonales.length ; j++) {
-				System.out.print("Nombre del tratamiento: ");
-				String aNombre = validarString();
-				
-					for(Tratamientos t : tratamientos) {
-						int k=0;
-						while(k==0) {
-						if(aNombre.equals(t.getNombre())) {
-							k=1;
-							if(tratamientosPersonales[0]==null) {
-								if(t.getTipoTratamiento()=='s') {
-									tratamientosPersonales[j]= new Salud();
-									tratamientosPersonales[j].setTratamientos(t);
-									while(true) {
-										System.out.print("Necita una consulta medica extra? (si/no): ");
-											String a= validarString().toLowerCase();
-											if(a.equals("si")) {
-												((Salud)tratamientosPersonales[j]).setConsultaClinica(true);
-												break;
-											}
-											else if(a.equals("no")) {
-												((Salud)tratamientosPersonales[j]).setConsultaClinica(false);
-												break;
-											}
-											else {
-												System.out.print("si o no: ");
-											}
-										}
-									}
-							
-								else{
-									tratamientosPersonales[j]= new TratamientosPersonales();
-									tratamientosPersonales[j].setTratamientos(t);
-								
-									break;}
-								
-							}
-							else {
-								int l=0;
-								for(TratamientosPersonales tp : tratamientosPersonales) {
-									if(tp!=null && tp.getTratamientos()!=null) {
-									if(tp.getTratamientos().getNombre().equals(aNombre)) {
-										System.out.print("ERROR. Ese tratamiento ya esta ingresado. Ingrese nuevamente: ");
-										aNombre = validarString();
-										l=1;
-										break;
-									}}
-								}
-								if(l==0) {
-									if(t.getTipoTratamiento()=='s') {
-										tratamientosPersonales[j]= new Salud();
-										tratamientosPersonales[j].setTratamientos(t);
-										while(true) {
-											System.out.print("Necita una consulta medica extra? (si/no): ");
-												String a= validarString().toLowerCase();
-												if(a.equals("si")) {
-													((Salud)tratamientosPersonales[j]).setConsultaClinica(true);
-													break;
-												}
-												else if(a.equals("no")) {
-													((Salud)tratamientosPersonales[j]).setConsultaClinica(false);
-													break;
-												}
-												else {
-													System.out.println("si o no: ");
-												}
-											}
-										}
-									else {
-										tratamientosPersonales[j]=new TratamientosPersonales();
-									    tratamientosPersonales[j].setTratamientos(t);
-										break;
-									}
-								}
-							}
-
-								
-							
-						}
-						else {
-							System.out.print("ERROR. Ingrese el nombre de un tratamiento ingresado en el sistema: ");
-							aNombre = validarString();
-						}
-						}
-					
-				}
-				
-
-				while(true) {
-					System.out.printf("Cantidad de sesiones que va a requerir (no mayor a %d): ", tratamientosPersonales[j].getTratamientos().getMaximoSesiones());
-					int cantidadSesiones = validarInt();
-					if(cantidadSesiones < tratamientosPersonales[j].getTratamientos().getMaximoSesiones()) {tratamientosPersonales[j].setCantidadSesiones(cantidadSesiones);break;}
-					else { System.out.println("ERROR");}
-					}
 			
 			///PREGUNTAR FORMA DE PAGO
 			System.out.print("Forma de pago. Efecto  'e', Debito 'd', Credito 'c': ");
@@ -370,7 +266,7 @@ case 2:  //PUNTO C - INGRESAR CLIENTES Y SUS TRATAMIENTOS MOSTRANDO POR PANTALLA
 								k=1;
 								System.out.println("Numero de afiliado: ");
 								String afiliado=validarString();
-								clientes[i] = new ConPrepagas(nombreCliente, aDNI, objetivo, fechaNacimiento, fechaInicio, sucursalesAtendidas, tratamientosPersonales, formaPago, p, afiliado);
+								clientes[i] = new ConPrepagas(nombreCliente, aDNI, objetivo, fechaNacimiento, fechaInicio, sucursalesAtendidas, formaPago, p, afiliado);
 								System.out.println("EL COSTO TOTAL DEL CLIENTES ES DE: " + String.format("%.3f", clientes[i].calcularCosto()));
 								break;
 
@@ -391,7 +287,7 @@ case 2:  //PUNTO C - INGRESAR CLIENTES Y SUS TRATAMIENTOS MOSTRANDO POR PANTALLA
 						}
 					}
 					Particulares.setCantidadClientesParticulares(Particulares.getCantidadClientesParticulares()+1);
-					clientes[i] = new Particulares(nombreCliente, aDNI, objetivo, fechaNacimiento, fechaInicio, sucursalesAtendidas, tratamientosPersonales, formaPago, descuento);
+					clientes[i] = new Particulares(nombreCliente, aDNI, objetivo, fechaNacimiento, fechaInicio, sucursalesAtendidas, formaPago, descuento);
 					System.out.println("EL COSTO TOTAL DEL CLIENTES ES DE: " + String.format("%.3f", clientes[i].calcularCosto()));
 				}
 				else {
@@ -399,6 +295,112 @@ case 2:  //PUNTO C - INGRESAR CLIENTES Y SUS TRATAMIENTOS MOSTRANDO POR PANTALLA
 				}
 				break;
 			}
+			//TRATAMIENTOS
+			int cantidadTratamientos=0;
+			while(true) {
+			System.out.printf("<<Cantidad de Tratamientos que el cliente va a tener (maximo %d): ", tratamientos.length);
+			cantidadTratamientos = validarInt();
+			if(cantidadTratamientos <= tratamientos.length) {break;}
+			else { System.out.printf("ERROR. Maximo %d", tratamientos.length);}
+			}
+		
+			for(int j=0; j<cantidadTratamientos ; j++) {
+				
+				System.out.print("Nombre del tratamiento: ");
+				String aNombre = validarString();
+				
+					for(Tratamientos t : tratamientos) {
+						int k=0;
+						while(k==0) {
+						if(aNombre.equals(t.getNombre())) {
+							
+							
+							k=1;
+							if(j==0 && clientes[i].getTratamientosP()[j]==null) {
+								if(t.getTipoTratamiento()=='s') {
+									clientes[i].createTratamientosP(t, true, j);
+									while(true) {
+										System.out.print("Necita una consulta medica extra? (si/no): ");
+											String a= validarString().toLowerCase();
+											if(a.equals("si")) {
+												((Salud)clientes[i].getTratamientosP()[j]).setConsultaClinica(true);
+												break;
+											}
+											else if(a.equals("no")) {
+												((Salud)clientes[i].getTratamientosP()[j]).setConsultaClinica(false);
+												break;
+											}
+											else {
+												System.out.print("si o no: ");
+											}
+										}
+									}
+							
+								else{
+									clientes[i].createTratamientosP(t, false, j);
+									break;}
+							}
+							//VER QUE NO SE REPITA 
+							else {
+								int l=0;
+								for(int aA = 0 ; aA < clientes[i].getTratamientosP().length ; aA ++) {
+									if(clientes[i].getTratamientosP()[aA] != null && clientes[i].getTratamientosP()[aA].getTratamientos() != null) {
+										if(clientes[i].getTratamientosP()[aA].getTratamientos().getNombre().equals(aNombre)) {
+											System.out.print("ERROR. Ese tratamiento ya esta ingresado. Ingrese nuevamente: ");
+											aNombre = validarString();
+											l=1;
+											k=0;
+											break;
+										}
+									}
+								}
+								if(l==0) {
+									if(t.getTipoTratamiento()=='s') {
+										clientes[i].createTratamientosP(t, true, j);
+
+										while(true) {
+											System.out.print("Necita una consulta medica extra? (si/no): ");
+												String a= validarString().toLowerCase();
+												if(a.equals("si")) {
+													((Salud)clientes[i].getTratamientosP()[j]).setConsultaClinica(true);
+													break;
+												}
+												else if(a.equals("no")) {
+													((Salud)clientes[i].getTratamientosP()[j]).setConsultaClinica(false);
+													break;
+												}
+												else {
+													System.out.println("si o no: ");
+												}
+											}
+										}
+									else {
+										clientes[i].createTratamientosP(t, false, j);
+
+										break;
+									}
+								}
+							}
+
+								
+							
+						}
+						else {
+							System.out.print("ERROR. Ingrese el nombre de un tratamiento ingresado en el sistema: ");
+							aNombre = validarString();
+						}
+						}
+					
+				}
+				
+
+				while(true) {
+					System.out.printf("Cantidad de sesiones que va a requerir (no mayor a %d): ", clientes[i].getTratamientosP()[j].getTratamientos().getMaximoSesiones());
+					int cantidadSesiones = validarInt();
+					if(cantidadSesiones < clientes[i].getTratamientosP()[j].getTratamientos().getMaximoSesiones()) {clientes[i].setTratamientosPCantidadSesiones(cantidadSesiones, j);break;}
+					else { System.out.println("ERROR");}
+					}
+			
 			}
 				
 				}
@@ -457,13 +459,13 @@ case 3:  //LOS TRATAMIENTOS ASIGNADOS A CADA CLIENTE PUEDEN SER MODIFICABLES JUN
 		}
 	}
 	if(respuestaB) {
-		System.out.println("Por cual tratamiento lo queres reemplazar? Ingrese el nombre: ");
+		System.out.print("Por cual tratamiento lo queres reemplazar? Ingrese el nombre del nuevo tratamiento asignado: ");
 		String nombreTratamiento = validarString();
 		boolean m = false;
 		for(int i = 0 ; i<tratamientos.length ; i++) {
 			if(!clientes[pos].getTratamientosP()[posT].getTratamientos().getNombre().equals(nombreTratamiento)) {
 			if(tratamientos[i].getNombre().equals(nombreTratamiento)) {
-				clientes[pos].getTratamientosP()[posT].setTratamientos(tratamientos[i]);
+				clientes[pos].setTratamientosP(tratamientos[i], posT); 
 				m = true;
 			}
 			}
@@ -485,10 +487,11 @@ case 3:  //LOS TRATAMIENTOS ASIGNADOS A CADA CLIENTE PUEDEN SER MODIFICABLES JUN
 			cantS= validarInt();
 		}
 	}
-	clientes[pos].getTratamientosP()[posT].setCantidadSesiones(cantS);
+	clientes[pos].setTratamientosPCantidadSesiones(cantS, posT);
 	//NUEVOS COSTOS
 	if(clientes[pos] instanceof ConPrepagas) {
-		System.out.println("El nuevo costo es: "+((ConPrepagas)clientes[pos]).calcularCosto());
+		System.out.println("El nuevo costo es: "+((ConPrepagas)clientes[pos]).
+				calcularCosto());
 	}
 	else if(clientes[pos] instanceof Particulares) {
 		System.out.println("El nuevo costo es: "+((Particulares)clientes[pos]).calcularCosto());
@@ -518,9 +521,10 @@ case 5:
 	for(Clientes c : clientes) {
 		 for(TratamientosPersonales t : c.getTratamientosP()) {
 		        for (int i = 0; i < tratamientosCorporales.length; i++) {
-		            if (tratamientosCorporales[i] != null && t.getTratamientos().getNombre().equals(tratamientosCorporales[i]) &&
-		                    c.getFechaInicio().after(fechaHoymenos3)) {
+		            if (tratamientosCorporales[i] != null) {
+		            	 if(t.getTratamientos().getNombre().equals(tratamientosCorporales[i]) && c.getFechaInicio().after(fechaHoymenos3)) {
 		                tratamientosCorporales[i] = null;
+		            }
 		            }
 		        }
 		 }
@@ -623,7 +627,7 @@ case 10: //GENERAR N AL AZAR DE 2 DIGITOS, INDICAR CANTIDAD DE CLIENTES QUE SUPE
 	for(Clientes c : clientes) {
 		int edad = fechaHoy.get(Calendar.YEAR)-c.getFechaNacimiento().get(Calendar.YEAR);
         if (fechaHoy.get(Calendar.MONTH) < c.getFechaNacimiento().get(Calendar.MONTH) || (fechaHoy.get(Calendar.MONTH) == c.getFechaNacimiento().get(Calendar.MONTH) && fechaHoy.get(Calendar.DATE) < c.getFechaNacimiento().get(Calendar.DATE))) {
-                edad--;
+                edad=edad-1;
             }
         if(edad>numeroAzar) {
         	for(TratamientosPersonales t : c.getTratamientosP()) {
